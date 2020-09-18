@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rohi_furniture_app/widgets/user_detail_view.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/product_provider.dart';
-import 'package:rohi_furniture_app/provider/user.dart';
 import 'package:rohi_furniture_app/provider/user_provider.dart';
 import 'package:rohi_furniture_app/screen/home_page_screen.dart';
+import 'package:rohi_furniture_app/screen/product_list_category_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +20,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         home: HomePageScreen(),
+        routes: {
+          ProductListCategoryScreen.routeId: (context) =>
+              ProductListCategoryScreen("all"),
+        },
       ),
     );
   }
