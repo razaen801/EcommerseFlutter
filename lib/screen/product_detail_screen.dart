@@ -1,109 +1,139 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/provider/product_provider.dart';
 
-class ProductDetails extends StatefulWidget {
+class ProductDetailScreen extends StatefulWidget {
+  static const String routeId = "/product_detail_view";
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _ProductDetailsState extends State<ProductDetailScreen> {
   int _counter = 0;
+  double _price = 0;
+
+  void setTotalPrice(double price) {
+    setState(() {
+      _price = price * _counter;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    String productId = ModalRoute.of(context).settings.arguments;
+    final product = Provider.of<ProductProvider>(context).findById(productId);
+    final price = product.productPrice;
     return Scaffold(
       appBar: AppBar(
-        title: Text("ProductName"),
+        backgroundColor: Color.fromRGBO(77, 93, 92, 1),
+        title: Text(product.productName),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            //Product Image Display
-            Container(
-              height: 300,
-              width: double.infinity,
-              child: Image.asset("name"),
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            //Product price
-            Container(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Product Price",
-                    style: TextStyle(
-                      color: Colors.deepOrange,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      FlatButton(
-                        onPressed: () {
-                          if (_counter > 0) {
-                            setState(() {
-                              _counter--;
-                            });
-                          }
-                        },
-                        child: Icon(Icons.remove),
-                      ),
-                      //Number of items
-                      Text(
-                        "$_counter",
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          setState(() {
-                            _counter++;
-                          });
-                        },
-                        child: Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //Product Image Display
+              Container(
+                padding: EdgeInsets.all(8.0),
+                height: 300,
+                width: double.infinity,
+                child: Image.asset("assets/carpet.jpg"),
               ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            //Product Description
-            Text(
-              "Description of the product",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18.0),
-            ),
-            SizedBox(
-              height: 158.0,
-            ),
-            Container(
-              height: 50.0,
-              color: Colors.red,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Total:Price",
+              SizedBox(
+                height: 15.0,
+              ),
+              //Product price
+              Container(
+                padding: EdgeInsets.only(left: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Rs. ${product.productPrice}",
                       style: TextStyle(
-                        fontSize: 20.0,
+                        color: Colors.deepOrange,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
-                      )),
-                  RaisedButton(
-                    onPressed: () {},
-                    child: Text("ADD TO CART"),
-                  ),
-                ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FlatButton(
+                          onPressed: () {
+                            if (_counter > 0) {
+                              setState(() {
+                                _counter--;
+                                setTotalPrice(price);
+                              });
+                            }
+                          },
+                          child: Icon(Icons.remove),
+                        ),
+                        //Number of items
+                        Text(
+                          "$_counter",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            setState(() {
+                              _counter++;
+                              setTotalPrice(price);
+                            });
+                          },
+                          child: Icon(Icons.add),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            )
-          ],
-        ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  product.productDescription,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              ),
+            ],
+          ),
+          //Product Description
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 7.0),
+            height: 55.0,
+            color: Color.fromRGBO(77, 93, 92, 1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Total: $_price",
+                    style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "ADD TO CART",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Color.fromRGBO(77, 93, 92, 1),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CareerViewScreen extends StatefulWidget {
+class CareerScreenView extends StatefulWidget {
   @override
   _CareerViewScreenState createState() => _CareerViewScreenState();
 }
 
-class _CareerViewScreenState extends State<CareerViewScreen> {
-  String _name;
-  String _email;
-  String _address;
-  String _phoneNumber;
-  String _post;
-  String _experience;
-  String _message;
+class _CareerViewScreenState extends State<CareerScreenView> {
+  final _emailFocusNode = FocusNode();
+  final _phoneFocusNode = FocusNode();
+  final _addressFocusNode = FocusNode();
+  final _contactFocusNode = FocusNode();
+  final _positionFocusNode = FocusNode();
+  final _experienceFocusNode = FocusNode();
+  final _messageFocusNode = FocusNode();
+  final _form = GlobalKey<FormState>();
 
   Widget getBullet() {
     return Container(
@@ -124,13 +125,19 @@ class _CareerViewScreenState extends State<CareerViewScreen> {
                   height: 20,
                 ),
                 Form(
+                  key: _form,
                   child: Center(
                     child: Container(
                       width: 350,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_emailFocusNode);
+                            },
                             decoration: InputDecoration(
                               labelText: "Your good name",
                               border: new OutlineInputBorder(
@@ -144,7 +151,10 @@ class _CareerViewScreenState extends State<CareerViewScreen> {
                           SizedBox(
                             height: 5,
                           ),
-                          TextField(
+                          TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.next,
+                            focusNode: _emailFocusNode,
                             decoration: InputDecoration(
                               labelText: "Email address",
                               border: new OutlineInputBorder(
@@ -154,39 +164,18 @@ class _CareerViewScreenState extends State<CareerViewScreen> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_phoneFocusNode);
+                            },
                           ),
                           SizedBox(
                             height: 5,
                           ),
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: "Phone Number",
-                              border: new OutlineInputBorder(
-                                borderSide: new BorderSide(
-                                  color: _color,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: "Address",
-                              border: new OutlineInputBorder(
-                                borderSide: new BorderSide(
-                                  color: _color,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          TextField(
+                          TextFormField(
+                            keyboardType: TextInputType.phone,
+                            textInputAction: TextInputAction.next,
+                            focusNode: _contactFocusNode,
                             decoration: InputDecoration(
                               labelText: "Contact No.",
                               border: new OutlineInputBorder(
@@ -196,6 +185,31 @@ class _CareerViewScreenState extends State<CareerViewScreen> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_positionFocusNode);
+                            },
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.streetAddress,
+                            textInputAction: TextInputAction.next,
+                            focusNode: _addressFocusNode,
+                            decoration: InputDecoration(
+                              labelText: "Address",
+                              border: new OutlineInputBorder(
+                                borderSide: new BorderSide(
+                                  color: _color,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_contactFocusNode);
+                            },
                           ),
                           SizedBox(
                             height: 10,
@@ -263,7 +277,9 @@ class _CareerViewScreenState extends State<CareerViewScreen> {
                           SizedBox(
                             height: 5,
                           ),
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            focusNode: _positionFocusNode,
                             decoration: InputDecoration(
                               labelText: "Position You want to apply",
                               border: new OutlineInputBorder(
@@ -273,11 +289,17 @@ class _CareerViewScreenState extends State<CareerViewScreen> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_experienceFocusNode);
+                            },
                           ),
                           SizedBox(
                             height: 5,
                           ),
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            focusNode: _experienceFocusNode,
                             decoration: InputDecoration(
                               labelText: "Experience",
                               border: new OutlineInputBorder(
@@ -287,11 +309,18 @@ class _CareerViewScreenState extends State<CareerViewScreen> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_messageFocusNode);
+                            },
                           ),
                           SizedBox(
                             height: 5,
                           ),
-                          TextField(
+                          TextFormField(
+                            textInputAction: TextInputAction.next,
+                            focusNode: _messageFocusNode,
+                            keyboardType: TextInputType.multiline,
                             decoration: InputDecoration(
                               labelText: "Message If any",
                               border: new OutlineInputBorder(

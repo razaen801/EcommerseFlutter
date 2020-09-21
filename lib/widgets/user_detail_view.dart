@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rohi_furniture_app/screen/home_page_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/provider/user_provider.dart';
 
 class UserDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return Column(
       children: [
         Container(
@@ -15,27 +17,8 @@ class UserDetailView extends StatelessWidget {
                   bottomRight: Radius.circular(100.0),
                   bottomLeft: Radius.circular(100.0))),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              //Close Button
-              Container(
-                width: MediaQuery.of(context).size.width * 1,
-                height: 20,
-                alignment: Alignment.topRight,
-                child: FlatButton(
-                  splashColor: Colors.transparent,
-                  child: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePageScreen()));
-                  },
-                ),
-              ),
               Row(
                 children: [
                   //Circle Image
@@ -63,7 +46,7 @@ class UserDetailView extends StatelessWidget {
                     padding: EdgeInsets.only(right: 20.0, bottom: 50.0),
                     alignment: Alignment.bottomRight,
                     child: Text(
-                      "Asish Lo Tamang",
+                      user.userName,
                       style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
@@ -117,7 +100,7 @@ class UserDetailView extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        "+9779823456123",
+                        user.userPhone,
                         style: TextStyle(
                           color: Color.fromRGBO(77, 93, 92, 1),
                           fontSize: 20.0,
@@ -138,7 +121,7 @@ class UserDetailView extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        "abc@gmail.com",
+                        user.userEmail,
                         style: TextStyle(
                           color: Color.fromRGBO(77, 93, 92, 1),
                           fontSize: 20.0,
@@ -159,7 +142,7 @@ class UserDetailView extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        "Kathmandu,Nepal",
+                        user.userAddress,
                         style: TextStyle(
                           color: Color.fromRGBO(77, 93, 92, 1),
                           fontSize: 20.0,
