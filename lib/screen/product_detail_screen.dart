@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
-import 'package:rohi_furniture_app/provider/product.dart';
 import 'package:rohi_furniture_app/provider/product_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {

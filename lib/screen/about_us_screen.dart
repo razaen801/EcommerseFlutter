@@ -10,17 +10,18 @@ class AboutUsScreen extends StatelessWidget {
           backgroundColor: Color.fromRGBO(77, 93, 92, 1),
           title: Text("About Us"),
         ),
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Column(
               children: [
-                Image.asset("assets/career.png"),
-                SizedBox(
-                  height: 10.0,
+                Image.asset(
+                  "assets/logoRohi.jpg",
+                  height: 200,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
                     "Established in the year 2009,Rohi International is a private company "
                     "which provides the quality imported furniture's from the world's "

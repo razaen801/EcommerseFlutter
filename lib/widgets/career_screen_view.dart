@@ -46,6 +46,10 @@ class _CareerViewScreenState extends State<CareerScreenView> {
     Color _color = Color.fromRGBO(77, 93, 92, 1);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(77, 93, 92, 1),
+          title: Text("Join Us"),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
