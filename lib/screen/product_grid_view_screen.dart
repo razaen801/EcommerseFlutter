@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/widgets/app_drawer.dart';
+import 'package:rohi_furniture_app/widgets/badge.dart';
 import 'package:rohi_furniture_app/widgets/product_grid_view.dart';
 
 enum FilterOptions { Favourites, All }
@@ -19,6 +22,8 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(77, 93, 92, 1),
+        title: Text("Products"),
         actions: [
           PopupMenuButton(
             icon: Icon(Icons.more_vert),
@@ -41,9 +46,22 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
               PopupMenuItem(child: Text("Show All"), value: FilterOptions.All),
             ],
           ),
+          Consumer<Cart>(
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              color: Colors.white,
+              onPressed: () {
+                // Navigator.pushNamed(context, CartScreen.routeId);
+              },
+            ),
+            builder: (_, cart, child) {
+              return Badge(
+                child: child,
+                value: cart.itemCount.toString(),
+              );
+            },
+          ),
         ],
-        backgroundColor: Color.fromRGBO(77, 93, 92, 1),
-        title: Text("Products"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
