@@ -43,7 +43,7 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                   padding: EdgeInsets.all(8.0),
                   height: 300,
                   width: double.infinity,
-                  child: Image.asset("assets/carpet.jpg"),
+                  child: Image.asset(product.productImgUrl),
                 ),
                 SizedBox(
                   height: 15.0,
