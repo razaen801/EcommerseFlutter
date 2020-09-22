@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/user_provider.dart';
+import 'package:rohi_furniture_app/screen/favourite_product_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'badge.dart';
 
 class UserDetailView extends StatelessWidget {
+  void openMap() async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=	27.7167,	85.3167';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
@@ -17,7 +32,7 @@ class UserDetailView extends StatelessWidget {
                   bottomRight: Radius.circular(100.0),
                   bottomLeft: Radius.circular(100.0))),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
@@ -30,6 +45,7 @@ class UserDetailView extends StatelessWidget {
                           width: 5.0,
                         )),
                     width: MediaQuery.of(context).size.width * 0.35,
+                    margin: EdgeInsets.only(left: 20),
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 70.0,
@@ -43,8 +59,8 @@ class UserDetailView extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width * 0.55,
-                    padding: EdgeInsets.only(right: 20.0, bottom: 50.0),
-                    alignment: Alignment.bottomRight,
+                    padding: EdgeInsets.only(right: 30.0, bottom: 50.0),
+                    alignment: Alignment.bottomCenter,
                     child: Text(
                       user.userName,
                       style: TextStyle(
@@ -54,24 +70,47 @@ class UserDetailView extends StatelessWidget {
                     ),
                   )
                 ],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
               //Icon List
               Container(
-                width: MediaQuery.of(context).size.width * .6,
+                width: MediaQuery.of(context).size.width * .65,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.list,
-                      color: Colors.white,
+                    IconButton(
+                      icon: Icon(
+                        Icons.list,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        openMap();
+                      },
                     ),
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.white,
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, FavouriteProductScreen.routeId);
+                      },
+                      icon: Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                      ),
                     ),
-                    Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
+                    Consumer<Cart>(
+                      child: IconButton(
+                        icon: Icon(Icons.shopping_cart),
+                        color: Colors.white,
+                        onPressed: () {
+                          // Navigator.pushNamed(context, CartScreen.routeId);
+                        },
+                      ),
+                      builder: (_, cart, child) {
+                        return Badge(
+                          child: child,
+                          value: cart.itemCount.toString(),
+                        );
+                      },
                     ),
                   ],
                 ),

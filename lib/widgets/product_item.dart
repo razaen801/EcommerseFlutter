@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/product.dart';
 import 'package:rohi_furniture_app/screen/product_detail_screen.dart';
 
@@ -7,6 +8,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, ProductDetailScreen.routeId,
@@ -44,7 +46,10 @@ class ProductItem extends StatelessWidget {
                     icon: Icon(
                       Icons.shopping_cart,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      cart.addToCart(product.productId, product.productName,
+                          product.productPrice);
+                    },
                   ),
                 ],
               )

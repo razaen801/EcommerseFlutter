@@ -3,7 +3,7 @@ import 'package:rohi_furniture_app/provider/user.dart';
 
 class UserProvider with ChangeNotifier {
   User user = new User(
-      userName: "Kushal",
+      userName: "Kushal Shrestha",
       userID: "1",
       userPhone: "9860168413",
       userAddress: "Balaju",
