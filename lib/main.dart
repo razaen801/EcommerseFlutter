@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rohi_furniture_app/screen/about_us_screen.dart';
+import 'package:rohi_furniture_app/screen/career_screen.dart';
+import 'package:rohi_furniture_app/screen/product_detail_screen.dart';
+import 'package:rohi_furniture_app/widgets/user_detail_view.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/product_provider.dart';
