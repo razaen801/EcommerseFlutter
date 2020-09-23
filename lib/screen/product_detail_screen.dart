@@ -145,7 +145,7 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                 RaisedButton(
                   onPressed: () {
                     cart.addToCart(product.productId, product.productName,
-                        product.productPrice);
+                        product.productPrice, product.productImgUrl);
                   },
                   child: Text(
                     "ADD TO CART",
