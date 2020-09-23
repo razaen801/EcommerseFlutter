@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CareerScreenView extends StatefulWidget {
@@ -170,7 +169,7 @@ class _CareerViewScreenState extends State<CareerScreenView> {
                             ),
                             onFieldSubmitted: (_) {
                               FocusScope.of(context)
-                                  .requestFocus(_phoneFocusNode);
+                                  .requestFocus(_contactFocusNode);
                             },
                           ),
                           SizedBox(
@@ -191,7 +190,7 @@ class _CareerViewScreenState extends State<CareerScreenView> {
                             ),
                             onFieldSubmitted: (_) {
                               FocusScope.of(context)
-                                  .requestFocus(_positionFocusNode);
+                                  .requestFocus(_addressFocusNode);
                             },
                           ),
                           SizedBox(
@@ -212,7 +211,7 @@ class _CareerViewScreenState extends State<CareerScreenView> {
                             ),
                             onFieldSubmitted: (_) {
                               FocusScope.of(context)
-                                  .requestFocus(_contactFocusNode);
+                                  .requestFocus(_positionFocusNode);
                             },
                           ),
                           SizedBox(

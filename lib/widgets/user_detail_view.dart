@@ -3,21 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/user_provider.dart';
 import 'package:rohi_furniture_app/screen/favourite_product_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:rohi_furniture_app/screen/purchase_history_screen.dart';
 
 import 'badge.dart';
 
 class UserDetailView extends StatelessWidget {
-  void openMap() async {
-    String googleUrl =
-        'https://www.google.com/maps/search/?api=1&query=	27.7167,	85.3167';
-    if (await canLaunch(googleUrl)) {
-      await launch(googleUrl);
-    } else {
-      throw 'Could not open the map.';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
@@ -86,7 +76,8 @@ class UserDetailView extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          openMap();
+                          Navigator.pushNamed(
+                              context, PurchaseHistoryScreen.routeId);
                         },
                       ),
                       IconButton(

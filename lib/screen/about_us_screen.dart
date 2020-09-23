@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rohi_furniture_app/widgets/app_drawer.dart';
 
 class AboutUsScreen extends StatelessWidget {
   @override
