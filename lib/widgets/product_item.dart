@@ -48,7 +48,7 @@ class ProductItem extends StatelessWidget {
                     ),
                     onPressed: () {
                       cart.addToCart(product.productId, product.productName,
-                          product.productPrice);
+                          product.productPrice, product.productImgUrl);
                     },
                   ),
                 ],

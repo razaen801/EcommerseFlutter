@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
+import 'package:rohi_furniture_app/screen/cart_list_screen.dart';
 import 'package:rohi_furniture_app/widgets/app_drawer.dart';
 import 'package:rohi_furniture_app/widgets/badge.dart';
 import 'package:rohi_furniture_app/widgets/product_grid_view.dart';
@@ -51,7 +52,7 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
               icon: Icon(Icons.shopping_cart),
               color: Colors.white,
               onPressed: () {
-                // Navigator.pushNamed(context, CartScreen.routeId);
+                 Navigator.pushNamed(context, CartListScreen.routeId);
               },
             ),
             builder: (_, cart, child) {
