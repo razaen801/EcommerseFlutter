@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Product with ChangeNotifier {
-  String productName, productId, productDescription;
+  String productName, productId, productDescription,productImgUrl;
   double productPrice;
   String productCategory;
   bool isFavourite;
@@ -9,6 +9,7 @@ class Product with ChangeNotifier {
   Product(
       {this.productName,
       this.productId,
+      this.productImgUrl,
       this.productPrice,
       this.productDescription,
       this.productCategory,

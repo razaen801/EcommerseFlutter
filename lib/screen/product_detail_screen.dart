@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
@@ -44,7 +43,7 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                   padding: EdgeInsets.all(8.0),
                   height: 300,
                   width: double.infinity,
-                  child: Image.asset("assets/carpet.jpg"),
+                  child: Image.asset(product.productImgUrl),
                 ),
                 SizedBox(
                   height: 15.0,
@@ -117,12 +116,14 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    product.productDescription,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18.0),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      product.productDescription,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18.0),
+                    ),
                   ),
                 ),
               ],

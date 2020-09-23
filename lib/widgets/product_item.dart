@@ -23,7 +23,7 @@ class ProductItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                "assets/carpet.jpg",
+                product.productImgUrl,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

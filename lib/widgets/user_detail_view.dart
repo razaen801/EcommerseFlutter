@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/user_provider.dart';
 import 'package:rohi_furniture_app/screen/favourite_product_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:rohi_furniture_app/screen/purchase_history_screen.dart';
 
 import 'badge.dart';
 
@@ -75,7 +75,10 @@ class UserDetailView extends StatelessWidget {
                           Icons.list,
                           color: Colors.white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, PurchaseHistoryScreen.routeId);
+                        },
                       ),
                       IconButton(
                         onPressed: () {
