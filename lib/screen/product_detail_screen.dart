@@ -73,7 +73,7 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                                 product.toggleIsFavourite();
                               });
                             },
-                            iconSize: 32,
+                            iconSize: 28,
                             color: Colors.red,
                           ),
                         ],
@@ -116,12 +116,14 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    product.productDescription,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18.0),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      product.productDescription,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18.0),
+                    ),
                   ),
                 ),
               ],
