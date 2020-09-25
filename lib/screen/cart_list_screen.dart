@@ -24,54 +24,49 @@ class _CartListScreenState extends State<CartListScreen>{
         title: Text("Your Cart"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-              height: 450,
               width: MediaQuery.of(context).size.width,
               color: Colors.black12,
               child: CartView()
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Card(
-                color: Color.fromRGBO(73, 92, 93, 0.5),
-                margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                  child: ListTile(
-                    leading: Text("TOTAL PRICE",
-                    style:TextStyle(
-                        fontSize: 18,
-                        color: Color.fromRGBO(77, 92, 93, 1),
-                        fontWeight: FontWeight.bold),),
-                      trailing: Text("RS $_totalPrice",
+          // SizedBox(
+          //   height: 10,
+          // ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: [
+                    Text("TOTAL PRICE: ",
                       style:TextStyle(
                           fontSize: 18,
                           color: Color.fromRGBO(77, 92, 93, 1),
                           fontWeight: FontWeight.bold),),
-                  ),
-                 ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0 ,bottom:0.0),
-                child: RaisedButton(
-                  color: Color.fromRGBO(77, 92, 93, 0.5),
-                  onPressed: (){
-
-                  },
-                    child: Text("PROCEED TO CHECK OUT",
-                        style: TextStyle(
-                        fontSize: 20,
-                            color: Color.fromRGBO(77, 92, 93, 1),
-                        fontWeight: FontWeight.bold),)
+                    Text("RS $_totalPrice",
+                      style:TextStyle(
+                          fontSize: 18,
+                          color: Color.fromRGBO(77, 92, 93, 1),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                RaisedButton(
+                    onPressed: (){
+
+                    },
+                    child: Text("ORDER NOW",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromRGBO(77, 92, 93, 1),
+                          fontWeight: FontWeight.bold),)
+                ),
+              ],
+            ),
           ),
+
         ],
       ),
       );

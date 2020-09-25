@@ -6,67 +6,49 @@ class ProductProvider with ChangeNotifier {
     Product(
         productId: "1",
         productImgUrl: "assets/Boss-HB.png",
-        productDescription: "Executive chair with\n"
-            "Multi Locking Tilt Mechanism\n"
-            "Fiber Foam Cushion\n"
-            "Super Soft Reline",
+        productDescription: "Executive chair with Multi Locking Tilt Mechanism, Fiber Foam Cushion and Super Soft Reline",
         productName: "Boss-HB",
         productPrice: 31300.0,
         productCategory: "LUXOR CHAIR"),
     Product(
         productId: "2",
         productImgUrl: "assets/Zetta-HB.png",
-        productDescription: "Executive Chair with \n"
-            "Ergonomic Design\n"
-            "Tilt Tension Control\n"
-            "Back Recline Locking\n"
-            "Seat Height Adjustment",
+        productDescription: "Executive Chair with Ergonomic Design,Tilt Tension Control,Back Recline Locking and Seat Height Adjustment",
         productName: "Zetta-HB",
         productPrice: 19100.0,
         productCategory: "LUXOR CHAIR"),
     Product(
         productId: "3",
         productImgUrl: "assets/Star.png",
-        productDescription: "Officer Chair with \n"
-            "Mesh Back,Chrome Base\n"
-            "PU Adjustment\n"
-            "Multi Locking Tilt Mechanism\n",
+        productDescription: "Officer Chair with Mesh Back,Chrome Base,PU Adjustment and Multi Locking Tilt Mechanism",
         productName: "Star Chair",
         productPrice: 11950.0,
         productCategory: "LUXOR CHAIR"),
     Product(
         productId: "4",
         productImgUrl: "assets/Palwa-HB.jpg",
-        productDescription: "Executive Chair with\n"
-            "Synthetic Leather\n"
-            "Multi Tilt Mechanism\n"
-            "Imported Steel Base\n"
-            "Arm Rest",
+        productDescription: "Executive Chair with Synthetic Leather,Multi Tilt Mechanism,Imported Steel Base and Arm Rest",
         productName: "Palwa HB",
         productPrice: 28150.0,
         productCategory: "LUXOR CHAIR"),
     Product(
         productId: "5",
         productImgUrl: "assets/Kaleen-Carpet.jpg",
-        productDescription: "Step into comfort.Accentuate look for your home\n"
-            "with attractive color and design. Symbol of luxury and elegance",
-        productName: "Kaleen Carpet",
+        productDescription: "Step into comfort.Accentuate look for your home with attractive color and design. Symbol of luxury and elegance",
+        productName: "Kallen Carpet",
         productPrice: 7500.0,
         productCategory: "KALEEN RUGS"),
     Product(
         productId: "6",
         productImgUrl: "assets/carpet.jpg",
-        productDescription: "Step into comfort.\n"
-            " Accentuate look for your home with attractive color and design.\n"
-            " Symbol of luxury and elegance.",
-        productName: "Kaleen Carpet",
+        productDescription: "Step into comfort.Accentuate look for your home with attractive color and design.Symbol of luxury and elegance.",
+        productName: "Kallen Carpet",
         productPrice: 7500.0,
         productCategory: "KALEEN RUGS"),
     Product(
         productId: "7",
         productImgUrl: "assets/amaze.jpg",
-        productDescription: "Folding Table with\n"
-            "Centre Folding Bench-Blow Moulded Folding Bench",
+        productDescription: "Folding Table with Centre Folding Bench-Blow Moulded Folding Bench",
         productName: "Amaze table",
         productPrice: 16200.0,
         productCategory: "SUPREME FURNITURE"),
@@ -94,48 +76,36 @@ class ProductProvider with ChangeNotifier {
     Product(
         productId: "11",
         productImgUrl: "assets/bison.jpg",
-        productDescription:
-            "Premium Finish Heavy Duty Six Seater Dinning Table with\n"
-            "Extra Broad and Wide table top and Contemporary Style Solid Built Legs ",
+        productDescription: "Premium Finish Heavy Duty Six Seater Dinning Table with Extra Broad and Wide table top and Contemporary Style Solid Built Legs ",
         productName: "Bison Table",
         productPrice: 13500.0,
         productCategory: "SUPREME FURNITURE"),
     Product(
         productId: "12",
         productImgUrl: "assets/Saw-1013.jpg",
-        productDescription: "Korean Vinyl Tiles\n"
-            "Wood surface deco vinyl floor 3mm fireproof waterproof tile pvc floor luxury vinyl plank floor",
+        productDescription: "Korean Vinyl Tiles Wood surface deco vinyl floor 3mm fireproof waterproof tile pvc floor luxury vinyl plank floor",
         productName: "SAW-103",
         productPrice: 140.0,
         productCategory: "ART DECO-PVC TILES"),
     Product(
         productId: "13",
         productImgUrl: "assets/Saw-3053.jpg",
-        productDescription: "Korean Vinyl Tiles\n"
-            "Wood surface deco vinyl floor 3mm fireproof waterproof tile pvc floor luxury vinyl plank floor",
+        productDescription: "Korean Vinyl Tiles Wood surface deco vinyl floor 3mm fireproof waterproof tile pvc floor luxury vinyl plank floor",
         productName: "SAW-3053",
         productPrice: 140.0,
         productCategory: "ART DECO-PVC TILES"),
     Product(
         productId: "14",
         productImgUrl: "assets/DYH80020.jpg",
-        productDescription:
-            "It is designed to replicate the natural color, grain and texture of real hardwood. \n"
-            "Laminate is remarkably realistic and exceptionally durable -resistant to staining, scratches, wear and fading.\n"
-            " 1. Easy installation \n"
-            "2. cost effective \n"
-            "3. Good stain resistance",
+        productDescription: "It is designed to replicate the natural color, grain and texture of real hardwood.Laminate is remarkably "
+                            "realistic and exceptionally durable -resistant to staining, scratches, wear and fading.Easy installation, cost effective and Good stain resistance",
         productName: "DYH80020",
         productPrice: 135.0,
         productCategory: "FLOOR MAX -LAMINATE"),
     Product(
         productId: "15",
         productImgUrl: "assets/DHY80385.jpg",
-        productDescription:
-            "It is designed to replicate the natural color, grain and texture of real hardwood. \n"
-            "Laminate is remarkably realistic and exceptionally durable -resistant to staining, scratches, wear and fading.\n "
-            "1. Easy installation \n"
-            "2. cost effective 3. Good stain resistance",
+        productDescription: "It is designed to replicate the natural color, grain and texture of real hardwood.Laminate is remarkably realistic and exceptionally durable -resistant to staining, scratches, wear and fading.Easy installation, cost effective and Good stain resistance",
         productName: "DYH80385",
         productPrice: 135.0,
         productCategory: "FLOOR MAX -LAMINATE"),
@@ -157,19 +127,15 @@ class ProductProvider with ChangeNotifier {
         productId: "17",
         productImgUrl: "assets/pvc-flooring-1.jpg",
         productDescription: "1.Width-79inch\n"
-            "2. 1 roll = 30 meter \n"
-            "3. it's surface is treated with a clear and transparent wear layer to protect its design and color.",
+                            "2. 1 roll = 30 meter \n"
+                            "3. It's surface is treated with a clear and transparent wear layer to protect its design and color.",
         productName: "MINI CALIO",
         productPrice: 13500.0,
         productCategory: "PVC FLOORING"),
     Product(
         productId: "18",
         productImgUrl: "assets/deco-1022.jpg",
-        productDescription:
-            "DECO Tile offers distinctive PVC plank designs with the realistic look of natural materials at a reasonable costs.\n"
-            " 1. high durability \n"
-            "2. reasonable price \n"
-            "3. water resistant",
+        productDescription: "DECO Tile offers distinctive PVC plank designs with the realistic look of natural materials at a reasonable costs.High durability, reasonable price and water resistant",
         productName: "Deco Floor",
         productPrice: 135.0,
         productCategory: "DECO FLOOR PVC TILES"),
