@@ -98,6 +98,8 @@ class UserDetailView extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(
                                 context, CartListScreen.routeId);
+                            Navigator.pushNamed(
+                                context, CartListScreen.routeId);
                           },
                         ),
                         builder: (_, cart, child) {

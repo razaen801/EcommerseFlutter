@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
               ProductListCategoryScreen("all"),
           ProductDetailScreen.routeId: (context) => ProductDetailScreen(),
           FavouriteProductScreen.routeId: (context) => FavouriteProductScreen(),
-          PurchaseHistoryScreen.routeId: (context) => PurchaseHistoryScreen(),
           CartListScreen.routeId: (context) => CartListScreen(),
+          PurchaseHistoryScreen.routeId: (context) => PurchaseHistoryScreen(),
         },
       ),
     );
