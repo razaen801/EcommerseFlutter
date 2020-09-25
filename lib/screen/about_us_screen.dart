@@ -20,7 +20,7 @@ class AboutUsScreen extends StatelessWidget {
                   height: 200,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Text(
                     "Established in the year 2009,Rohi International is a private company "
                     "which provides the quality imported furniture's from the world's "

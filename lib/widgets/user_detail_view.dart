@@ -96,7 +96,10 @@ class UserDetailView extends StatelessWidget {
                           icon: Icon(Icons.shopping_cart),
                           color: Colors.white,
                           onPressed: () {
-                            Navigator.pushNamed(context, CartListScreen.routeId);
+                            Navigator.pushNamed(
+                                context, CartListScreen.routeId);
+                            Navigator.pushNamed(
+                                context, CartListScreen.routeId);
                           },
                         ),
                         builder: (_, cart, child) {

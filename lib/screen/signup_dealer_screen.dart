@@ -6,7 +6,6 @@ class SignUpDealer extends StatefulWidget {
 }
 
 class _SignUpDealerState extends State<SignUpDealer> {
-  @override
   bool _obsureValue1 = true;
   bool _obsureValue2 = true;
   FocusNode _userNameFocusNode = new FocusNode();
@@ -54,6 +53,7 @@ class _SignUpDealerState extends State<SignUpDealer> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -200,7 +200,7 @@ class _SignUpDealerState extends State<SignUpDealer> {
                     controller: itemCompanyNameController,
                     focusNode: _companyNameFocusNode,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.add_business),
+                      icon: Icon(Icons.business),
                       hintText: "Company Name",
                       border: InputBorder.none,
                     ),
@@ -275,7 +275,7 @@ class _SignUpDealerState extends State<SignUpDealer> {
                     controller: itemLandLineNumberController,
                     focusNode: _landLineNumberFocusNode,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.add_ic_call),
+                      icon: Icon(Icons.add_call),
                       hintText: "LandLine Number",
                       border: InputBorder.none,
                     ),
@@ -297,7 +297,7 @@ class _SignUpDealerState extends State<SignUpDealer> {
                       icon: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(Icons.file_copy),
+                          Icon(Icons.attach_file),
                           FlatButton(
                             onPressed: () {},
                             child: Text(
