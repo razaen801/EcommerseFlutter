@@ -338,22 +338,41 @@ class _CareerViewScreenState extends State<CareerScreenView> {
                           SizedBox(
                             height: 5,
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 2,
-                                color: Color.fromRGBO(77, 93, 92, 1),
-                              ),
-                              borderRadius: BorderRadius.circular(10),
+                          FlatButton(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  color: Color.fromRGBO(77, 93, 92, 1),
+                                  width: 2,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: FlatButton(
-                              onPressed: () {},
+                            onPressed: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 3, vertical: 8),
                               child: Text(
                                 "Submit",
                                 style: TextStyle(fontSize: 24, color: _color),
                               ),
                             ),
-                          )
+                          ),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //     border: Border.all(
+                          //       width: 2,
+                          //       color: Color.fromRGBO(77, 93, 92, 1),
+                          //     ),
+                          //     borderRadius: BorderRadius.circular(10),
+                          //   ),
+                          //   child: FlatButton(
+                          //     clipBehavior: Clip.hardEdge,
+                          //     onPressed: () {},
+                          //     child: Text(
+                          //       "Submit",
+                          //       style: TextStyle(fontSize: 24, color: _color),
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                     ),
