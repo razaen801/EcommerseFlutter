@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rohi_furniture_app/screen/product_list_category_screen.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   void onPressedFunc(ctx, category) {
     // Navigator.pushNamed(ctx,ProductListCategoryScreen.routeId,
     //     arguments: category,);
@@ -48,71 +53,236 @@ class AppDrawer extends StatelessWidget {
                       )),
                 ),
               ),
-              Column(
+              ExpansionTile(
+                title: Text("LUXOR CHAIR"),
                 children: [
                   ListTile(
-                    title: Text("LUXOR CHAIR"),
+                    title: Text("Show LUXOR CHAIR"),
                     onTap: () {
                       Navigator.pop(context);
                       onPressedFunc(context, "LUXOR CHAIR");
                     },
                   ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
                 ],
               ),
               Divider(),
-              ListTile(
+              ExpansionTile(
                 title: Text("SUPREME FURNITURE"),
-                onTap: () {
-                  Navigator.pop(context);
-                  onPressedFunc(context, "SUPREME FURNITURE");
-                },
+                children: [
+                  ListTile(
+                    title: Text("SUPREME FURNITURE"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedFunc(context, "SUPREME FURNITURE");
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
+                ],
               ),
               Divider(),
-              ListTile(
-                  title: Text("ART DECO-PVC TILES"),
-                  onTap: () {
-                    Navigator.pop(context);
-                    onPressedFunc(context, "ART DECO-PVC TILES");
-                  }),
+              ExpansionTile(
+                title: Text("ART DECO-PVC TILES"),
+                children: [
+                  ListTile(
+                    title: Text("ART DECO-PVC TILES"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedFunc(context, "ART DECO-PVC TILES");
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
+                ],
+              ),
               Divider(),
-              ListTile(
+              ExpansionTile(
                 title: Text("FLOOR MAX -LAMINATE"),
-                onTap: () {
-                  Navigator.pop(context);
-                  onPressedFunc(context, "FLOOR MAX -LAMINATE");
-                },
+                children: [
+                  ListTile(
+                    title: Text("FLOOR MAX -LAMINATE"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedFunc(context, "FLOOR MAX -LAMINATE");
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
+                ],
               ),
               Divider(),
-              ListTile(
+              ExpansionTile(
                 title: Text("DECO FLOOR PVC TILES"),
-                onTap: () {
-                  Navigator.pop(context);
-                  onPressedFunc(context, "DECO FLOOR PVC TILES");
-                },
+                children: [
+                  ListTile(
+                    title: Text("DECO FLOOR PVC TILES"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedFunc(context, "DECO FLOOR PVC TILES");
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
+                ],
               ),
               Divider(),
-              ListTile(
+              ExpansionTile(
                 title: Text("GRASSIA- ARTIFICIAL GRASS"),
-                onTap: () {
-                  Navigator.pop(context);
-                  onPressedFunc(context, "GRASSIA- ARTIFICIAL GRASS");
-                },
+                children: [
+                  ListTile(
+                    title: Text("GRASSIA- ARTIFICIAL GRASS"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedFunc(context, "GRASSIA- ARTIFICIAL GRASS");
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
+                ],
               ),
               Divider(),
-              ListTile(
+              ExpansionTile(
                 title: Text("PVC FLOORING"),
-                onTap: () {
-                  Navigator.pop(context);
-                  onPressedFunc(context, "PVC FLOORING");
-                },
+                children: [
+                  ListTile(
+                    title: Text("PVC FLOORING"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedFunc(context, "PVC FLOORING");
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
+                ],
               ),
               Divider(),
-              ListTile(
+              ExpansionTile(
                 title: Text("KALEEN RUGS"),
-                onTap: () {
-                  Navigator.pop(context);
-                  onPressedFunc(context, "KALEEN RUGS");
-                },
+                children: [
+                  ListTile(
+                    title: Text("KALEEN RUGS"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedFunc(context, "KALEEN RUGS");
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Executive Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Office Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Staff Chair"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Visitor Chair"),
+                    onTap: () {},
+                  ),
+                ],
               ),
               Divider()
             ],
