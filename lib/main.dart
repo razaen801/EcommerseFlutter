@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rohi_furniture_app/screen/about_us_screen.dart';
+import 'package:rohi_furniture_app/screen/career_screen.dart';
+import 'package:rohi_furniture_app/screen/cart_list_screen.dart';
 import 'package:rohi_furniture_app/screen/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
@@ -31,6 +34,7 @@ class MyApp extends StatelessWidget {
               ProductListCategoryScreen("all"),
           ProductDetailScreen.routeId: (context) => ProductDetailScreen(),
           FavouriteProductScreen.routeId: (context) => FavouriteProductScreen(),
+          CartListScreen.routeId: (context)=> CartListScreen(),
           PurchaseHistoryScreen.routeId: (context) => PurchaseHistoryScreen(),
         },
       ),
