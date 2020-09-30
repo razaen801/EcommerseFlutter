@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rohi_furniture_app/widgets/infoCard.dart';
-import 'package:rohi_furniture_app/widgets/slider.dart';
+import 'package:rohi_furniture_app/widgets/contact_slider.dart';
 import 'package:url_launcher/url_launcher.dart' as Luncher;
 
 const address = 'Our Address\n'
@@ -48,16 +48,6 @@ class Contact extends StatelessWidget {
                 color: Colors.black,
                 child: CarouselSliderDemo(),
               ),
-              // CircleAvatar(
-              //   radius: 100,
-              //   backgroundImage: AssetImage('images/logo_rohi.jpg'),
-              // ),
-              // Text('Rohi Internatinal',
-              // style: TextStyle(
-              //     fontSize:40.0,
-              //     color:Colors.white,
-              //     fontWeight: FontWeight.bold,
-              // ),),
               SizedBox(
                 height: 20,
                 width: MediaQuery.of(context).size.width,

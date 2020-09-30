@@ -1,167 +1,86 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:rohi_furniture_app/provider/product.dart';
+import 'package:rohi_furniture_app/database/database.dart';
+import 'package:rohi_furniture_app/database/productDB.dart';
+import 'package:rohi_furniture_app/database/save_to_database.dart';
+import 'package:rohi_furniture_app/provider/localProduct.dart';
 
 class ProductProvider with ChangeNotifier {
-  List<Product> _productList = [
-    Product(
-        productId: "1",
-        productImgUrl: "assets/Boss-HB.png",
-        productDescription: "Executive chair with Multi Locking Tilt Mechanism, Fiber Foam Cushion and Super Soft Reline",
-        productName: "Boss-HB",
-        productPrice: 31300.0,
-        productCategory: "LUXOR CHAIR"),
-    Product(
-        productId: "2",
-        productImgUrl: "assets/Zetta-HB.png",
-        productDescription: "Executive Chair with Ergonomic Design,Tilt Tension Control,Back Recline Locking and Seat Height Adjustment",
-        productName: "Zetta-HB",
-        productPrice: 19100.0,
-        productCategory: "LUXOR CHAIR"),
-    Product(
-        productId: "3",
-        productImgUrl: "assets/Star.png",
-        productDescription: "Officer Chair with Mesh Back,Chrome Base,PU Adjustment and Multi Locking Tilt Mechanism",
-        productName: "Star Chair",
-        productPrice: 11950.0,
-        productCategory: "LUXOR CHAIR"),
-    Product(
-        productId: "4",
-        productImgUrl: "assets/Palwa-HB.jpg",
-        productDescription: "Executive Chair with Synthetic Leather,Multi Tilt Mechanism,Imported Steel Base and Arm Rest",
-        productName: "Palwa HB",
-        productPrice: 28150.0,
-        productCategory: "LUXOR CHAIR"),
-    Product(
-        productId: "5",
-        productImgUrl: "assets/Kaleen-Carpet.jpg",
-        productDescription: "Step into comfort.Accentuate look for your home with attractive color and design. Symbol of luxury and elegance",
-        productName: "Kallen Carpet",
-        productPrice: 7500.0,
-        productCategory: "KALEEN RUGS"),
-    Product(
-        productId: "6",
-        productImgUrl: "assets/carpet.jpg",
-        productDescription: "Step into comfort.Accentuate look for your home with attractive color and design.Symbol of luxury and elegance.",
-        productName: "Kallen Carpet",
-        productPrice: 7500.0,
-        productCategory: "KALEEN RUGS"),
-    Product(
-        productId: "7",
-        productImgUrl: "assets/amaze.jpg",
-        productDescription: "Folding Table with Centre Folding Bench-Blow Moulded Folding Bench",
-        productName: "Amaze table",
-        productPrice: 16200.0,
-        productCategory: "SUPREME FURNITURE"),
-    Product(
-        productId: "8",
-        productImgUrl: "assets/antik.jpg",
-        productDescription: "Premium Chair without Arms",
-        productName: "Antik Chair",
-        productPrice: 3150.0,
-        productCategory: "SUPREME FURNITURE"),
-    Product(
-        productId: "9",
-        productImgUrl: "assets/astra.jpg",
-        productDescription: "Center Table Trolley",
-        productName: "Astra Table",
-        productPrice: 3400.0,
-        productCategory: "SUPREME FURNITURE"),
-    Product(
-        productId: "10",
-        productImgUrl: "assets/Bed.jpg",
-        productDescription: "Blow Moulded Bed",
-        productName: "Resto Bed",
-        productPrice: 19700.0,
-        productCategory: "SUPREME FURNITURE"),
-    Product(
-        productId: "11",
-        productImgUrl: "assets/bison.jpg",
-        productDescription: "Premium Finish Heavy Duty Six Seater Dinning Table with Extra Broad and Wide table top and Contemporary Style Solid Built Legs ",
-        productName: "Bison Table",
-        productPrice: 13500.0,
-        productCategory: "SUPREME FURNITURE"),
-    Product(
-        productId: "12",
-        productImgUrl: "assets/Saw-1013.jpg",
-        productDescription: "Korean Vinyl Tiles Wood surface deco vinyl floor 3mm fireproof waterproof tile pvc floor luxury vinyl plank floor",
-        productName: "SAW-103",
-        productPrice: 140.0,
-        productCategory: "ART DECO-PVC TILES"),
-    Product(
-        productId: "13",
-        productImgUrl: "assets/Saw-3053.jpg",
-        productDescription: "Korean Vinyl Tiles Wood surface deco vinyl floor 3mm fireproof waterproof tile pvc floor luxury vinyl plank floor",
-        productName: "SAW-3053",
-        productPrice: 140.0,
-        productCategory: "ART DECO-PVC TILES"),
-    Product(
-        productId: "14",
-        productImgUrl: "assets/DYH80020.jpg",
-        productDescription: "It is designed to replicate the natural color, grain and texture of real hardwood.Laminate is remarkably "
-                            "realistic and exceptionally durable -resistant to staining, scratches, wear and fading.Easy installation, cost effective and Good stain resistance",
-        productName: "DYH80020",
-        productPrice: 135.0,
-        productCategory: "FLOOR MAX -LAMINATE"),
-    Product(
-        productId: "15",
-        productImgUrl: "assets/DHY80385.jpg",
-        productDescription: "It is designed to replicate the natural color, grain and texture of real hardwood.Laminate is remarkably realistic and exceptionally durable -resistant to staining, scratches, wear and fading.Easy installation, cost effective and Good stain resistance",
-        productName: "DYH80385",
-        productPrice: 135.0,
-        productCategory: "FLOOR MAX -LAMINATE"),
-    Product(
-        productId: "16",
-        productImgUrl: "assets/Artifical-Grass.jpg",
-        productDescription: "1.Pile Height:-35 mm \n"
-            "2.Tuft Gauge:-3/8 inch \n"
-            "3.Stitch Rate:-18/10 CM \n"
-            "4.Material/Detex:-PE & PP 8300 \n"
-            "5.MAX UV defence \n"
-            "6.Cost Effective \n"
-            "7. Environment Friendly \n"
-            "8.Shorter Construction Period.",
-        productName: "Artificial Grass",
-        productPrice: 150.0,
-        productCategory: "GRASSIA- ARTIFICIAL GRASS"),
-    Product(
-        productId: "17",
-        productImgUrl: "assets/pvc-flooring-1.jpg",
-        productDescription: "1.Width-79inch\n"
-                            "2. 1 roll = 30 meter \n"
-                            "3. It's surface is treated with a clear and transparent wear layer to protect its design and color.",
-        productName: "MINI CALIO",
-        productPrice: 13500.0,
-        productCategory: "PVC FLOORING"),
-    Product(
-        productId: "18",
-        productImgUrl: "assets/deco-1022.jpg",
-        productDescription: "DECO Tile offers distinctive PVC plank designs with the realistic look of natural materials at a reasonable costs.High durability, reasonable price and water resistant",
-        productName: "Deco Floor",
-        productPrice: 135.0,
-        productCategory: "DECO FLOOR PVC TILES"),
-  ];
+  List<LocalProduct> _productList = [];
+
+  Future<String> getProductFromServer() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      SaveToDB saveToDB = new SaveToDB();
+      await saveToDB.loadProductsToDB();
+    }
+    return "Success";
+  }
 
   // return list of all products
-  List<Product> get products {
+  Future<List<LocalProduct>> getProductFromDB() async {
+    // Timer.periodic(Duration(milliseconds: 2000), (timer) {
+    //   getProductFromServer();
+    // });
+
+    final database = await $FloorAppDatabase.databaseBuilder('Product').build();
+    final productDao = database.productDao;
+    try {
+      List<ProductDB> _productListDB = await productDao.findAllProducts();
+      for (int i = 0; i < _productListDB.length; i++) {
+        LocalProduct newLocalProduct = new LocalProduct(
+            id: _productListDB[i].id,
+            productName: _productListDB[i].productName,
+            description: _productListDB[i].description,
+            availableColors: _productListDB[i].availableColors,
+            availableSizes: _productListDB[i].availableSizes,
+            categoryId: _productListDB[i].categoryId,
+            dealerPrice: _productListDB[i].dealerPrice,
+            enabled: _productListDB[i].enabled,
+            inStock: _productListDB[i].enabled,
+            retailerPrice: _productListDB[i].retailerPrice,
+            subCategoryId: _productListDB[i].subCategoryId,
+            imageName: _productListDB[i].imageName,
+            isFavourite: _productListDB[i].isFavourite);
+        _productList.add(newLocalProduct);
+      }
+    } catch (e) {
+      throw e;
+    }
+    return _productList;
+  }
+
+  //get all products
+  List<LocalProduct> get products {
     return [..._productList];
   }
 
   //get product by id
-  Product findById(String id) {
+  LocalProduct findById(int id) {
     return _productList.firstWhere((prod) {
-      return prod.productId == id;
+      return prod.id == id;
     });
   }
 
   //get product by category
-  List<Product> findByCategory(String category) {
+  List<LocalProduct> findByCategory(int categoryId) {
     return _productList.where((prod) {
-      return prod.productCategory == category;
+      return prod.categoryId == categoryId;
+    }).toList();
+  }
+
+  //getProduct by sub category
+  List<LocalProduct> findBySubCategory(int subCategoryId) {
+    return _productList.where((prod) {
+      return prod.subCategoryId == subCategoryId;
     }).toList();
   }
 
   //get favourite product
-  List<Product> get favourites {
+  List<LocalProduct> get favourites {
     return _productList.where((prodItem) {
       return prodItem.isFavourite;
     }).toList();

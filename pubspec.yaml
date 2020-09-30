@@ -33,6 +33,13 @@ dependencies:
   url_launcher: ^5.6.0
   email_launcher: ^1.0.0
   carousel_slider: ^2.2.1
+  http: '0.11.3+17'
+  connectivity: ^0.4.9+2
+  cached_network_image: ^2.0.0
+  floor: ^0.14.0
+  floor_generator: ^0.14.0
+  build_runner: ^1.10.2
+  shared_preferences: ^0.5.12
 
 
 dev_dependencies:

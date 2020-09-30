@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:rohi_furniture_app/widgets/product_grid_view.dart';
+import 'package:rohi_furniture_app/widgets/sub_category_grid_view.dart';
 
 // ignore: must_be_immutable
-class ProductListCategoryScreen extends StatelessWidget {
-  static const String routeId = "/product_list_category_screen";
-
-  int categoryID;
+class ProductSubCategoryScreen extends StatelessWidget {
+  int categoryId;
+  int categorySubId;
   String categoryName;
-  ProductListCategoryScreen(this.categoryName, this.categoryID);
+  ProductSubCategoryScreen(
+      this.categoryName, this.categoryId, this.categorySubId);
 
   @override
   Widget build(BuildContext context) {
-    final category = categoryID;
+    final category = categorySubId;
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -20,9 +20,7 @@ class ProductListCategoryScreen extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.all(8.0),
-        child: ProductGridView(
-          category: category,
-        ),
+        child: SubCategoryGridView(category),
       ),
     ));
   }

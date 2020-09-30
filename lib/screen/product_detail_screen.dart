@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
+import 'package:rohi_furniture_app/provider/favourites_provider.dart';
 import 'package:rohi_furniture_app/provider/product_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -10,22 +12,16 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetailScreen> {
-  // int _counter = 0;
-  // double _price = 0;
-  //
-  // void setTotalPrice(double price) {
-  //   setState(() {
-  //     _price = price * _counter;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
-    String productId = ModalRoute.of(context).settings.arguments;
+    int productId = ModalRoute.of(context).settings.arguments;
     final product = Provider.of<ProductProvider>(context, listen: false)
         .findById(productId);
     final cart = Provider.of<Cart>(context, listen: false);
+    final favouriteProduct =
+        Provider.of<FavouriteProductsProvider>(context, listen: false);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(77, 93, 92, 1),
         title: Text(product.productName),
@@ -43,7 +39,12 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                   padding: EdgeInsets.all(8.0),
                   height: 300,
                   width: double.infinity,
-                  child: Image.asset(product.productImgUrl),
+                  color: Colors.white,
+                  child: CachedNetworkImage(
+                    imageUrl: "https://rohiint.com${product.imageName}",
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
                 SizedBox(
                   height: 15.0,
@@ -55,7 +56,7 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Rs. ${product.productPrice}",
+                        "Rs. ${product.retailerPrice}",
                         style: TextStyle(
                           color: Colors.deepOrange,
                           fontSize: 24,
@@ -70,7 +71,15 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                                 : Icon(Icons.favorite_border),
                             onPressed: () {
                               setState(() {
-                                product.toggleIsFavourite();
+                                if (product.toggleIsFavourite()) {
+                                  favouriteProduct
+                                      .addFavouriteProduct(product.id);
+                                  return;
+                                } else {
+                                  favouriteProduct
+                                      .removeFavouriteProduct(product.id);
+                                  return;
+                                }
                               });
                             },
                             iconSize: 28,
@@ -78,38 +87,6 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                           ),
                         ],
                       )
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.end,
-                      //   children: [
-                      //     FlatButton(
-                      //       onPressed: () {
-                      //         if (_counter > 0) {
-                      //           setState(() {
-                      //             _counter--;
-                      //             setTotalPrice(price);
-                      //           });
-                      //         }
-                      //       },
-                      //       child: Icon(Icons.remove),
-                      //     ),
-                      //     //Number of items
-                      //     Text(
-                      //       "$_counter",
-                      //       style: TextStyle(
-                      //         fontSize: 20,
-                      //       ),
-                      //     ),
-                      //     FlatButton(
-                      //       onPressed: () {
-                      //         setState(() {
-                      //           _counter++;
-                      //           setTotalPrice(price);
-                      //         });
-                      //       },
-                      //       child: Icon(Icons.add),
-                      //     ),
-                      //   ],
-                      // ),
                     ],
                   ),
                 ),
@@ -120,7 +97,7 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text(
-                      product.productDescription,
+                      product.description,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18.0),
                     ),
@@ -135,25 +112,21 @@ class _ProductDetailsState extends State<ProductDetailScreen> {
             height: 55.0,
             color: Color.fromRGBO(77, 93, 92, 1),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Text("Total: $_price",
-                //     style: TextStyle(
-                //         fontSize: 22.0,
-                //         fontWeight: FontWeight.bold,
-                //         color: Colors.white)),
-                RaisedButton(
+                FlatButton(
                   onPressed: () {
-                    cart.addToCart(product.productId, product.productName,
-                        product.productPrice, product.productImgUrl);
+                    cart.addToCart(product.id.toString(), product.productName,
+                        double.parse(product.retailerPrice), product.imageName);
                   },
                   child: Text(
                     "ADD TO CART",
                     style: TextStyle(
                         fontSize: 18,
-                        color: Color.fromRGBO(77, 93, 92, 1),
+                        color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
+                  color: Color.fromRGBO(77, 93, 92, 1),
                 ),
               ],
             ),

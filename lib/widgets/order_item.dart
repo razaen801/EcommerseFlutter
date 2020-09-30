@@ -1,25 +1,36 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rohi_furniture_app/provider/cart_provider.dart';
+import 'package:rohi_furniture_app/provider/order_provider.dart';
+import 'package:rohi_furniture_app/provider/product_provider.dart';
 
-class CartProductItem extends StatefulWidget {
-  final String title, imageUrl;
-  final double price;
-  final int quantity, productId;
+// ignore: must_be_immutable
+class OrderItem extends StatefulWidget {
+  int productId;
+  double price;
+  String imageName;
 
-  CartProductItem(
-      {this.title, this.productId, this.price, this.quantity, this.imageUrl});
+  OrderItem(this.productId, this.price, this.imageName);
 
   @override
-  _CartProductItemState createState() => _CartProductItemState();
+  _OrderItemState createState() => _OrderItemState();
 }
 
-class _CartProductItemState extends State<CartProductItem> {
+class _OrderItemState extends State<OrderItem> {
+  int _quantity = 0;
+  double _productTotal;
+  setTotalProductPrice() {
+    setState(() {
+      _productTotal = _quantity * widget.price;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cartItem = Provider.of<Cart>(context);
+    final orders = Provider.of<OrderList>(context, listen: false);
+    setTotalProductPrice();
+    final itemProvider = Provider.of<ProductProvider>(context, listen: false)
+        .findById(widget.productId);
     return Container(
       height: 150,
       child: Card(
@@ -44,7 +55,7 @@ class _CartProductItemState extends State<CartProductItem> {
                         height: 100,
                         width: 50,
                         child: CachedNetworkImage(
-                          imageUrl: "https://rohiint.com${widget.imageUrl}",
+                          imageUrl: "https://rohiint.com${widget.imageName}",
                           fit: BoxFit.cover,
                           placeholder: (context, url) => Padding(
                             padding: const EdgeInsets.all(50.0),
@@ -60,9 +71,9 @@ class _CartProductItemState extends State<CartProductItem> {
                       ),
                     ),
                     Text(
-                      widget.title.length < 15
-                          ? widget.title
-                          : "${widget.title.substring(0, 13)}...",
+                      itemProvider.productName.length < 15
+                          ? itemProvider.productName
+                          : "${itemProvider.productName.substring(0, 13)}...",
                       style: TextStyle(
                           fontSize: 18.0,
                           color: Color.fromRGBO(77, 93, 92, 1),
@@ -80,24 +91,49 @@ class _CartProductItemState extends State<CartProductItem> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 20.0, right: 10),
                     child: Text(
-                      "Rs.${widget.price}",
+                      "Rs. $_productTotal",
                       style: TextStyle(
                           fontSize: 28,
                           color: Color.fromRGBO(77, 93, 92, 1),
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    color: Color.fromRGBO(77, 93, 92, 1),
-                    onPressed: () {
-                      cartItem.removeFromCart(widget.productId.toString());
-                    },
-                    child: Text(
-                      "Remove",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            if (_quantity > 0) {
+                              setState(() {
+                                _quantity--;
+                                orders.removeOrder(widget.imageName);
+                                setTotalProductPrice();
+                              });
+                            }
+                          });
+                        },
+                        child: Icon(Icons.remove),
+                      ),
+                      //Number of items
+                      Text(
+                        "$_quantity",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            _quantity++;
+                            orders.addOrder(widget.productId, _quantity,
+                                widget.price, widget.imageName);
+                            setTotalProductPrice();
+                          });
+                        },
+                        child: Icon(Icons.add),
+                      ),
+                    ],
                   ),
                 ],
               ),

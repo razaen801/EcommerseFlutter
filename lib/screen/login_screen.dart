@@ -6,14 +6,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  @override
   bool _obsureValue = true;
   FocusNode _userNameFocusNode = new FocusNode();
   FocusNode _passwordFocusNode = new FocusNode();
 
   final itemUsernameController = new TextEditingController();
   final itemPasswordController = new TextEditingController();
-
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

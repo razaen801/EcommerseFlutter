@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:rohi_furniture_app/database/cartDB/cart_product.dart';
+import 'package:rohi_furniture_app/database/database.dart';
 
 class CartItem {
-  final String id, title,imgUrl;
+  int productId;
+  final String title, imgUrl;
   final double price;
-  final int quantity;
 
   CartItem(
-      {@required this.id,
+      {@required this.productId,
       @required this.title,
       @required this.imgUrl,
-      @required this.price,
-      @required this.quantity});
+      @required this.price});
 }
 
 class Cart with ChangeNotifier {
@@ -22,23 +23,14 @@ class Cart with ChangeNotifier {
 
   void addToCart(String productId, String title, double price, String imgUrl) {
     if (_items.containsKey(productId)) {
-      //update the current item quantity
-      _items.update(
-          productId,
-          (existingCartItem) => CartItem(
-              id: existingCartItem.id,
-              quantity: existingCartItem.quantity + 1,
-              imgUrl: existingCartItem.imgUrl,
-              price: existingCartItem.price,
-              title: existingCartItem.title));
+      return;
     } else {
       _items.putIfAbsent(
           productId,
           () => CartItem(
-              id: productId.toString(),
+              productId: int.parse(productId),
               title: title,
               price: price,
-              quantity: 1,
               imgUrl: imgUrl)); //CartItem
     }
     notifyListeners();
@@ -55,37 +47,40 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
-  double getTotalAmount() {
-    double total = 0.0;
-    _items.forEach((key, cartItem) {
-      total += cartItem.quantity * cartItem.price;
-    });
-    return total;
-  }
-
   void clearCart() {
     _items = {};
     notifyListeners();
   }
 
-  //This removes single item form cart
-  void removeSingleItemFromCart(String id) {
-    if (!_items.containsKey(id)) {
-      return;
+  loadToCartDB() async {
+    final database = await $FloorAppDatabase.databaseBuilder('Product').build();
+    final cartDao = database.cartDao;
+    cartDao.deleteAllCarts();
+    for (int i = 0; i < _items.length; i++) {
+      final product = ProductCartDB(
+          _items.values.toList()[i].title,
+          _items.values.toList()[i].imgUrl,
+          _items.values.toList()[i].price,
+          _items.values.toList()[i].productId);
+      await cartDao.insertProduct(product);
     }
-    if (_items[id].quantity > 1) {
-      _items.update(id, (existingCartItem) {
-        return CartItem(
-          id: existingCartItem.id,
-          title: existingCartItem.title,
-          imgUrl: existingCartItem.imgUrl,
-          price: existingCartItem.price,
-          quantity: existingCartItem.quantity - 1,
-        );
-      });
+    print("added to cart");
+  }
+
+  loadFromCart() async {
+    final database = await $FloorAppDatabase.databaseBuilder('Product').build();
+    final cartDao = database.cartDao;
+    List<ProductCartDB> _productCartDB = await cartDao.findAllProducts();
+    if (_productCartDB.isEmpty) {
+      _items.clear();
     } else {
-      _items.remove(id);
+      for (int i = 0; i < _productCartDB.length; i++) {
+        addToCart(
+            _productCartDB[i].productId.toString(),
+            _productCartDB[i].productName,
+            _productCartDB[i].productPrice,
+            _productCartDB[i].imageName);
+      }
     }
-    notifyListeners();
   }
 }

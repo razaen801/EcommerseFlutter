@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/screen/about_us_screen.dart';
 import 'package:rohi_furniture_app/screen/career_view_screen.dart';
 import 'package:rohi_furniture_app/screen/contact_us_screen.dart';
@@ -12,8 +14,6 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
-  int pageIndex = 2;
-
   //create all pages
   final UserDetailScreen _userDetailScreen = new UserDetailScreen();
   final AboutUsScreen _aboutUsScreen = new AboutUsScreen();
@@ -55,6 +55,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context, listen: false);
+    cart.loadFromCart();
+    int pageIndex = 2;
     return SafeArea(
       child: Scaffold(
         body: Container(

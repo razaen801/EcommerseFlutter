@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rohi_furniture_app/screen/product_list_category_screen.dart';
+import 'package:rohi_furniture_app/screen/product_sub_category_screen.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -7,7 +8,7 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  void onPressedFunc(ctx, category) {
+  void onPressedFunc(ctx, categoryName, categoryID) {
     // Navigator.pushNamed(ctx,ProductListCategoryScreen.routeId,
     //     arguments: category,);
     Navigator.push(
@@ -26,7 +27,32 @@ class _AppDrawerState extends State<AppDrawer> {
             },
             pageBuilder: (BuildContext context, Animation<double> animation,
                 Animation<double> secAnimation) {
-              return ProductListCategoryScreen(category);
+              return ProductListCategoryScreen(categoryName, categoryID);
+            }));
+  }
+
+  //launch subcategory view
+  void onPressedSubCategory(ctx, categoryName, categoryId, categorySubId) {
+    // Navigator.pushNamed(ctx,ProductListCategoryScreen.routeId,
+    //     arguments: category,);
+    Navigator.push(
+        ctx,
+        PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 300),
+            transitionsBuilder: (ctx, animation, secondaryAnimation, child) {
+              var begin = Offset(1, 0.0);
+              var end = Offset.zero;
+              var tween = Tween(begin: begin, end: end);
+              var offsetAnimation = animation.drive(tween);
+              return SlideTransition(
+                position: offsetAnimation,
+                child: child,
+              );
+            },
+            pageBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secAnimation) {
+              return ProductSubCategoryScreen(
+                  categoryName, categoryId, categorySubId);
             }));
   }
 
@@ -60,24 +86,36 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("Show LUXOR CHAIR"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "LUXOR CHAIR");
+                      onPressedFunc(context, "LUXOR CHAIR", 1);
                     },
                   ),
                   ListTile(
                     title: Text("Executive Chair"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Executive Chair", 1, 1);
+                    },
                   ),
                   ListTile(
                     title: Text("Office Chair"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Office Chair", 1, 2);
+                    },
                   ),
                   ListTile(
                     title: Text("Staff Chair"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Staff Chair", 1, 3);
+                    },
                   ),
                   ListTile(
                     title: Text("Visitor Chair"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Visitor Chair", 1, 4);
+                    },
                   ),
                 ],
               ),
@@ -89,24 +127,60 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("SUPREME FURNITURE"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "SUPREME FURNITURE");
+                      onPressedFunc(context, "SUPREME FURNITURE", 2);
                     },
                   ),
                   ListTile(
-                    title: Text("Executive Chair"),
-                    onTap: () {},
+                    title: Text("Premium Chair with Arms"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(
+                          context, "Premium Chair with Arms", 2, 14);
+                    },
                   ),
                   ListTile(
-                    title: Text("Office Chair"),
-                    onTap: () {},
+                    title: Text("Premium Chair without Arms"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(
+                          context, "Premium Chair without Arms", 2, 15);
+                    },
                   ),
                   ListTile(
-                    title: Text("Staff Chair"),
-                    onTap: () {},
+                    title: Text("Dining table"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Dining table", 2, 16);
+                    },
                   ),
                   ListTile(
-                    title: Text("Visitor Chair"),
-                    onTap: () {},
+                    title: Text("Folding Table & chairs"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(
+                          context, "Folding Table & chairs", 2, 17);
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Sofa"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Sofa", 2, 18);
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Kids collection"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Kids collection", 2, 19);
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Center Table"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Center Table", 2, 20);
+                    },
                   ),
                 ],
               ),
@@ -118,24 +192,16 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("ART DECO-PVC TILES"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "ART DECO-PVC TILES");
+                      onPressedFunc(context, "ART DECO-PVC TILES", 3);
                     },
                   ),
                   ListTile(
-                    title: Text("Executive Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Office Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Staff Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Visitor Chair"),
-                    onTap: () {},
+                    title: Text("Korean Vinyl Tiles"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(
+                          context, "Korean Vinyl Tiles", 3, 21);
+                    },
                   ),
                 ],
               ),
@@ -147,24 +213,15 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("FLOOR MAX -LAMINATE"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "FLOOR MAX -LAMINATE");
+                      onPressedFunc(context, "FLOOR MAX -LAMINATE", 4);
                     },
                   ),
                   ListTile(
-                    title: Text("Executive Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Office Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Staff Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Visitor Chair"),
-                    onTap: () {},
+                    title: Text("Laminate Flooring"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Laminate Flooring", 4, 11);
+                    },
                   ),
                 ],
               ),
@@ -176,24 +233,15 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("DECO FLOOR PVC TILES"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "DECO FLOOR PVC TILES");
+                      onPressedFunc(context, "DECO FLOOR PVC TILES", 5);
                     },
                   ),
                   ListTile(
-                    title: Text("Executive Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Office Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Staff Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Visitor Chair"),
-                    onTap: () {},
+                    title: Text("Deco Flooring"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Deco Flooring", 5, 23);
+                    },
                   ),
                 ],
               ),
@@ -205,24 +253,15 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("GRASSIA- ARTIFICIAL GRASS"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "GRASSIA- ARTIFICIAL GRASS");
+                      onPressedFunc(context, "GRASSIA- ARTIFICIAL GRASS", 6);
                     },
                   ),
                   ListTile(
-                    title: Text("Executive Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Office Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Staff Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Visitor Chair"),
-                    onTap: () {},
+                    title: Text("CC Grass"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "CC Grass", 6, 13);
+                    },
                   ),
                 ],
               ),
@@ -234,24 +273,15 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("PVC FLOORING"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "PVC FLOORING");
+                      onPressedFunc(context, "PVC FLOORING", 7);
                     },
                   ),
                   ListTile(
-                    title: Text("Executive Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Office Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Staff Chair"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("Visitor Chair"),
-                    onTap: () {},
+                    title: Text("Mini Calio 6.5ft"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "Mini Calio 6.5ft", 7, 12);
+                    },
                   ),
                 ],
               ),
@@ -263,24 +293,36 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: Text("KALEEN RUGS"),
                     onTap: () {
                       Navigator.pop(context);
-                      onPressedFunc(context, "KALEEN RUGS");
+                      onPressedFunc(context, "KALEEN RUGS", 8);
                     },
                   ),
                   ListTile(
-                    title: Text("Executive Chair"),
-                    onTap: () {},
+                    title: Text("H3620"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "H3620", 8, 6);
+                    },
                   ),
                   ListTile(
-                    title: Text("Office Chair"),
-                    onTap: () {},
+                    title: Text("H3381"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "H3381", 8, 8);
+                    },
                   ),
                   ListTile(
-                    title: Text("Staff Chair"),
-                    onTap: () {},
+                    title: Text("H3384"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "H3384", 8, 9);
+                    },
                   ),
                   ListTile(
-                    title: Text("Visitor Chair"),
-                    onTap: () {},
+                    title: Text("H3380"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      onPressedSubCategory(context, "H3380", 8, 10);
+                    },
                   ),
                 ],
               ),
