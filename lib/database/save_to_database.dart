@@ -13,9 +13,13 @@ class SaveToDB {
 
     try {
       final List<ProductDB> productFromDB = await productDao.findAllProducts();
-      List<Product> productFromServer = await Services.getProducts();
+      // List<Product> productFromServer = await Services.getProducts();
+      List<Product> productFromServer = await Services.getProductsNew("", "", "", "");
+      print("getting files");
       if (productFromDB.isEmpty) {
         for (int i = 0; i < productFromServer.length; i++) {
+          Media media = await Services.getProductImage(productFromServer[i].id);
+          print(media.fileName);
           ProductDB product = ProductDB(
               id: productFromServer[i].id,
               productName: productFromServer[i].productName,
@@ -28,7 +32,8 @@ class SaveToDB {
               inStock: productFromServer[i].enabled,
               retailerPrice: productFromServer[i].retailerPrice,
               subCategoryId: productFromServer[i].subcategoryId,
-              imageName: productFromServer[i].image,
+              imageName: '/media/${media.id}/${media.fileName}',
+              // imageName: productFromServer[i].image,
               isFavourite: false);
           await productDao.insertProduct(product);
         }
@@ -39,6 +44,7 @@ class SaveToDB {
             //check if user is present in database
             for (int j = 0; j < productFromDB.length; j++) {
               if (productFromDB[i].id != productFromServer[i].id) {
+                Media media = await Services.getProductImage(productFromServer[i].id);
                 final product = ProductDB(
                     id: productFromServer[i].id,
                     productName: productFromServer[i].productName,
@@ -51,7 +57,8 @@ class SaveToDB {
                     inStock: productFromServer[i].enabled,
                     retailerPrice: productFromServer[i].retailerPrice,
                     subCategoryId: productFromServer[i].subcategoryId,
-                    imageName: productFromServer[i].image,
+                    // imageName: productFromServer[i].image,
+                    imageName: '/media/${media.id}/${media.fileName}',
                     isFavourite: false);
                 await productDao.insertProduct(product);
               } else {

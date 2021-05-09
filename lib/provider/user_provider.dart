@@ -8,4 +8,8 @@ class UserProvider with ChangeNotifier {
       userPhone: "9860168413",
       userAddress: "Balaju",
       userEmail: "kushalshrestha85@gmail.com");
+
+  void addUser(User user) {}
+
+  saveUserToDB() {}
 }

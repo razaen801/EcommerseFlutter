@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rohi_furniture_app/server%20handler/services.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -33,6 +35,7 @@ class _SignUpState extends State<SignUp> {
       if (password != rePassword) {
         print("Password and re-password doesnot matched!");
       } else {
+        submitSignUpRequest(userName, email, password);
         print("Submitted");
       }
     }
@@ -185,26 +188,20 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an Account ?",
-                      style: TextStyle(
-                        color: Color.fromRGBO(77, 93, 92, 1),
-                      ),
+
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(29),
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "  Back  ",
+                      style: TextStyle(color: Colors.white),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        "SIGN IN",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(77, 93, 92, 1),
-                        ),
-                      ),
-                    )
-                  ],
+                    color: Color.fromRGBO(77, 93, 92, 1),
+                  ),
                 ),
               ],
             ),
@@ -213,4 +210,20 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
-}
+
+  void submitSignUpRequest(String name, String email, String password) async{
+    List<String> response= await Services.userSignUpNew(name, email, password);
+    showToastMessage(response.toString());
+  }
+
+  showToastMessage(String s) {
+    Fluttertoast.showToast(
+        msg: s,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        textColor: Colors.blue,
+        backgroundColor: Colors.white);
+  }
+  }
+
+

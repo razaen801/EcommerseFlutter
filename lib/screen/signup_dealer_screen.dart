@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rohi_furniture_app/server%20handler/services.dart';
 
 class SignUpDealer extends StatefulWidget {
   @override
@@ -49,6 +51,7 @@ class _SignUpDealerState extends State<SignUpDealer> {
         print("Password and re-password doesnot matched!");
       } else {
         print("Submitted");
+        submitSignUpRequest(userName,email,password);
       }
     }
   }
@@ -358,4 +361,14 @@ class _SignUpDealerState extends State<SignUpDealer> {
       ),
     );
   }
+
+  void submitSignUpRequest(String name, String email, String password) async{
+    // await Services.userSignUpNew(name, email, password).then((value) => {
+    //   showToastMessage("Successful")
+    //
+    // });
+  }
+
+  showToastMessage(String s) {}
+
 }

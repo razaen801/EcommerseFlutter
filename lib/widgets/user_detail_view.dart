@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/SharedPreferencesConfig.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/user_provider.dart';
 import 'package:rohi_furniture_app/screen/cart_list_screen.dart';
@@ -107,6 +108,17 @@ class UserDetailView extends StatelessWidget {
                           );
                         },
                       ),
+                      IconButton(
+                        onPressed: () {
+                          onLogOut(context);
+
+                        },
+                        icon: Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
+                      ),
+
                     ],
                   ),
                 ),
@@ -192,5 +204,10 @@ class UserDetailView extends StatelessWidget {
         )
       ],
     );
+  }
+
+  void onLogOut(BuildContext context) async {
+    await SharedPreferenceConfig.setIsLoggedIn(false);
+    Navigator.pushNamed(context, '/');
   }
 }

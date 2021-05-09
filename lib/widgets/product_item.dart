@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/localProduct.dart';
 import 'package:rohi_furniture_app/screen/product_detail_screen.dart';
+import 'package:rohi_furniture_app/server%20handler/services.dart';
+
+import '../uitlities.dart';
 
 class ProductItem extends StatelessWidget {
   @override
@@ -25,21 +29,49 @@ class ProductItem extends StatelessWidget {
               Container(
                 height: 175,
                 child: FittedBox(
-                  child: CachedNetworkImage(
-                    imageUrl: "https://rohiint.com${product.imageName}",
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Padding(
-                      padding: const EdgeInsets.all(50.0),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
+                    child:
+                //     FutureBuilder(
+                //   future: getImageUrl(product.id),
+                //   builder: (ctx, snapshot) {
+                //     return snapshot.connectionState == ConnectionState.waiting
+                //         ? Padding(
+                //           padding: const EdgeInsets.all(8.0),
+                //           child: new CircularProgressIndicator(
+                //               strokeWidth: 2,
+                //             ),
+                //         )
+                //         : CachedNetworkImage(
+                //             imageUrl: "https://rohiint.com/media/${product.id}/${snapshot.data(String)}",
+                //             fit: BoxFit.cover,
+                //             placeholder: (context, url) => Padding(
+                //               padding: const EdgeInsets.all(50.0),
+                //               child: CircularProgressIndicator(
+                //                 strokeWidth: 2,
+                //               ),
+                //             ),
+                //             errorWidget: (context, url, error) => Padding(
+                //               padding: const EdgeInsets.all(50.0),
+                //               child: Icon(Icons.error),
+                //             ),
+                //           );
+                //   },
+                // )
+
+                    CachedNetworkImage(
+                      imageUrl: "${Utility.imageBaseUrl}${product.imageName}",
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Padding(
+                        padding: const EdgeInsets.all(50.0),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Padding(
+                        padding: const EdgeInsets.all(50.0),
+                        child: Icon(Icons.error),
                       ),
                     ),
-                    errorWidget: (context, url, error) => Padding(
-                      padding: const EdgeInsets.all(50.0),
-                      child: Icon(Icons.error),
                     ),
-                  ),
-                ),
               ),
               // Image.asset(product.imageName),
               Row(
@@ -81,4 +113,10 @@ class ProductItem extends StatelessWidget {
           )),
     );
   }
+
+  // Future<String> getImageUrl(int id) async {
+  //   Media media;
+  //    media = (await Services.getProductImage(id)) as Media;
+  //    return media.fileName;
+  // }
 }

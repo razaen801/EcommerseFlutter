@@ -3,6 +3,10 @@
 //     final product = productFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 List<Product> productFromJson(String str) =>
     List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
@@ -10,6 +14,23 @@ List<Product> productFromJson(String str) =>
 String productToJson(List<Product> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+List<ProductResponseMain> productAllFromJson(String str)=>
+    // List<UserServer>.from(json.decode(str).map((x) => UserServer.fromJson(x)));
+    List<ProductResponseMain>.from(json.decode(str).map((x)=> ProductResponseMain.fromJson(x)));
+
+List<Media> MediaFromJson(String str) =>
+    List<Media>.from(json.decode(str).map((x)=>Media.fromJson(x)));
+
+class ProductResponseMain{
+  int current_page;
+  List<Product> products;
+  ProductResponseMain({this.current_page,this.products});
+
+  factory ProductResponseMain.fromJson(Map<String,dynamic> json)=>
+      ProductResponseMain(
+          current_page: json['current_page'],
+          products:  List<Product>.from(json["data"].map((x) => Product.fromJson(x))));
+}
 class Product {
   Product({
     this.id,
@@ -25,8 +46,8 @@ class Product {
     this.enabled,
     this.createdAt,
     this.updatedAt,
-    this.image,
-    this.media,
+    // this.image,
+    // this.media,
   });
 
   int id;
@@ -58,9 +79,9 @@ class Product {
         availableSizes: json["available_sizes"],
         enabled: json["enabled"],
         createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        image: json["image"],
-        media: List<Media>.from(json["media"].map((x) => Media.fromJson(x))),
+        updatedAt: DateTime.parse(json["updated_at"])
+        // image: json["image"],
+        // media: List<Media>.from(json["media"].map((x) => Media.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

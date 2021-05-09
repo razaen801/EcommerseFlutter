@@ -15,6 +15,7 @@ import 'package:rohi_furniture_app/screen/home_page_screen.dart';
 import 'package:rohi_furniture_app/screen/product_list_category_screen.dart';
 import 'package:rohi_furniture_app/screen/purchase_history_screen.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    loadDataFromServer();
+    // loadDataFromServer();
     return FutureBuilder(
       future: loadDataFromServer(),
       builder: (ctx, snapshot) {
