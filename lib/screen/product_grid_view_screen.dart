@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:rohi_furniture_app/SharedPreferencesConfig.dart';
 import 'package:rohi_furniture_app/provider/cart_provider.dart';
 import 'package:rohi_furniture_app/provider/localProduct.dart';
 import 'package:rohi_furniture_app/provider/product_provider.dart';
@@ -21,6 +23,25 @@ class ProductGridViewScreen extends StatefulWidget {
 class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
   Icon customIcon = Icon(Icons.search);
   Widget customSearchBar = Text("Products");
+  bool isLoggedin = false;
+  
+  Future checkLog() async{
+    bool result = await SharedPreferenceConfig.getIsLoggedIn();
+    setState(() {
+      isLoggedin = result;
+    });
+  }
+
+
+  void showToastMessage(String s) {
+    Fluttertoast.showToast(
+        msg: s,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        textColor: Colors.blue,
+        backgroundColor: Colors.white);
+  }
+  
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -83,7 +104,11 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
                         icon: Icon(Icons.shopping_cart),
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.pushNamed(context, CartListScreen.routeId);
+                          checkLog();
+                          if(isLoggedin){
+                            Navigator.pushNamed(context, CartListScreen.routeId);
+                          }
+                          else showToastMessage("Please login to continue");
                         },
                       ),
                       builder: (_, cart, child) {
@@ -111,6 +136,8 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
 }
 
 class ProductSearch extends SearchDelegate<ProductProvider> {
+
+
   @override
   List<Widget> buildActions(BuildContext context) {
     //  implement buildActions
@@ -150,9 +177,9 @@ class ProductSearch extends SearchDelegate<ProductProvider> {
     final hintProducts = [
       products[5],
       products[11],
-      products[22],
-      products[29],
-      products[50]
+      products[22]
+      // products[29],
+      // products[50]
     ];
 
     List<LocalProduct> suggestionList = query.isEmpty

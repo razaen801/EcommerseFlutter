@@ -68,147 +68,151 @@ class _LoginScreenState extends State<LoginScreen> {
     //         )) :
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
-          child: Center(
-            child: Container(
-              padding: EdgeInsets.only(top: 50, left: 24, right: 24),
-              child: Column(
-                children: [
-                  Image.asset("assets/logoRohi.jpg"),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Welcome to Login",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Color.fromRGBO(77, 93, 92, 1)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromRGBO(77, 93, 92, 1),
-                            ),
-                            borderRadius: BorderRadius.circular(29),
-                          ),
-                          child: TextFormField(
-                            controller: itemUsernameController,
-                            focusNode: _userNameFocusNode,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.person),
-                              hintText: "Username or Email",
-                              border: InputBorder.none,
-                            ),
-                            onFieldSubmitted: (_) {
-                              FocusScope.of(context)
-                                  .requestFocus(_passwordFocusNode);
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromRGBO(77, 93, 92, 1),
-                            ),
-                            borderRadius: BorderRadius.circular(29),
-                          ),
-                          child: TextField(
-                            controller: itemPasswordController,
-                            focusNode: _passwordFocusNode,
-                            obscureText: _obsureValue,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              hintText: "Password",
-                              border: InputBorder.none,
-                              suffixIcon: IconButton(
-                                icon: Icon(Icons.visibility),
-                                onPressed: () {
-                                  setState(() {
-                                    if (_obsureValue == true)
-                                      _obsureValue = false;
-                                    else
-                                      _obsureValue = true;
-                                  });
-                                },
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Center(
+              child: Container(
+                padding: EdgeInsets.only(top: 50, left: 24, right: 24),
+                child: Column(
+                  children: [
+                    Image.asset("assets/logoRohi.jpg"),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Welcome to Login",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Color.fromRGBO(77, 93, 92, 1)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color.fromRGBO(77, 93, 92, 1),
                               ),
+                              borderRadius: BorderRadius.circular(29),
+                            ),
+                            child: TextFormField(
+                              controller: itemUsernameController,
+                              focusNode: _userNameFocusNode,
+                              decoration: InputDecoration(
+                                icon: Icon(Icons.person),
+                                hintText: "Username or Email",
+                                border: InputBorder.none,
+                              ),
+                              onFieldSubmitted: (_) {
+                                FocusScope.of(context)
+                                    .requestFocus(_passwordFocusNode);
+                              },
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 30.0,
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(29),
-                          child: FlatButton(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 28, vertical: 13),
-                            onPressed: () {
-                              showToastMessage("Logging in");
-                              Services.newLoginRequest(itemUsernameController.text.trim(), itemPasswordController.text.trim(), context).then((value) => {
-                                if(value){
-                                  showToastMessage("Successful"),
-                                  Navigator.pushNamed(context, '/second')
-                                  // replaceLoginScreen(context)
-                                }
-                                else showToastMessage("Failed")
-                              });
-                              // loginToApp();
-                            },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                            color: Color.fromRGBO(77, 93, 92, 1),
+                          SizedBox(
+                            height: 10.0,
                           ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 100),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Don't have an Account ?",
-                                style: TextStyle(
-                                  color: Color.fromRGBO(77, 93, 92, 1),
+                          Container(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color.fromRGBO(77, 93, 92, 1),
+                              ),
+                              borderRadius: BorderRadius.circular(29),
+                            ),
+                            child: TextField(
+                              controller: itemPasswordController,
+                              focusNode: _passwordFocusNode,
+                              obscureText: _obsureValue,
+                              decoration: InputDecoration(
+                                icon: Icon(Icons.lock),
+                                hintText: "Password",
+                                border: InputBorder.none,
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.visibility),
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_obsureValue == true)
+                                        _obsureValue = false;
+                                      else
+                                        _obsureValue = true;
+                                    });
+                                  },
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignUp()));
-                                },
-                                child: Text(
-                                  "SIGN UP",
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(29),
+                            child: FlatButton(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 28, vertical: 13),
+                              onPressed: () {
+                                showToastMessage("Logging in");
+                                Services.newLoginRequest(itemUsernameController.text.trim(), itemPasswordController.text.trim(), context).then((value) => {
+                                  if(value){
+                                    showToastMessage("Successful"),
+                                    Navigator.pushNamed(context, '/second')
+                                    // replaceLoginScreen(context)
+                                  }
+                                  else showToastMessage("Failed")
+                                });
+                                // loginToApp();
+                              },
+                              child: Text(
+                                "Login",
+                                style: TextStyle(color: Colors.white, fontSize: 18),
+                              ),
+                              color: Color.fromRGBO(77, 93, 92, 1),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 100),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Don't have an Account ?",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.bold,
                                     color: Color.fromRGBO(77, 93, 92, 1),
                                   ),
                                 ),
-                              )
-                            ],
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SignUp()));
+                                  },
+                                  child: Text(
+                                    "SIGN UP",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(77, 93, 92, 1),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

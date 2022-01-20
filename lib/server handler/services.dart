@@ -43,14 +43,15 @@ class Services {
     }
   }
 
-  static Future<List<Product>> getProductsNew(String category_id, String subcategory_id,
-      String min, String max) async {
+  static Future<ProductResponseMain> getProductsNew(String category_id, String subcategory_id,
+      String min, String max, int page) async {
     try {
       Map<String, String> queryParams = {
         'category_id': category_id,
         'subcategory_id': subcategory_id,
         'min': min,
-        'max': max
+        'max': max,
+        'page': page.toString()
       };
       var productUrl = 'https://www.rohiint.com/product/app/get';
       String queryString = Uri(queryParameters: queryParams).query;
@@ -60,7 +61,7 @@ class Services {
       if (response.statusCode == 200) {
         final ProductResponseMain productResponseMain = ProductResponseMain.fromJson(jsonDecode(response.body));
         // final List<ProductResponseMain> productResponseMain = productAllFromJson(response.body);
-        return productResponseMain.products;
+        return productResponseMain;
         // final List<Product> products = productFromJson(response.body);
         // return products;
       } else {
@@ -114,17 +115,26 @@ class Services {
   }
 
   //user signUp
-  static Future<List<String>> userSignUpNew(
+  static Future<String> userSignUpNew(
       String name, String email, String password) async {
     final url = "https://www.rohiint.com/registerapp";
     try {
       final response = await http.post(url,
           body: {'name': name, 'email': email, 'password': password,"password_confirmation":password});
       if (response.statusCode == 200) {
-        return MessageResponse.fromJson('message', jsonDecode(response.body)).message;
+        // return MessageFromServer('message', response.body);
+        try {
+          return jsonDecode(response.body)['message'];
+        } catch (e) {
+          return 'We sent you an activation code. Check your email and click on the link to verify';
+          print(e);
+        }
+        // return MessageResponse.fromSuccessJson(jsonDecode(response.body)).message;
         print(response);
       } else if(response.statusCode==400) {
-        return MessageResponse.fromJson('errors', jsonDecode(response.body)).message;
+        // return MessageFromServer('message', response.body);
+        return MessageResponse.fromJson('errors', jsonDecode(response.body)).message.toString();
+        // return MessageResponse.fromJson('errors', jsonDecode(response.body)).message;
         print(response.statusCode);
       }
       else{
@@ -230,19 +240,20 @@ class Services {
       final response = await http
           .post(url, headers: <String, String>{'Authorization': basicAuth});
       if (response.statusCode == 200) {
-        UserLoginDetails userLoginDetails =
-            UserLoginDetails.fromJson(jsonDecode(response.body));
+        // UserLoginDetails userLoginDetails =
+        //     UserLoginDetails.fromJson(jsonDecode(response.body));
 
         await SharedPreferenceConfig.saveUserDetails(response.body);
         await SharedPreferenceConfig.setIsLoggedIn(true);
 
         // final List<UserLoginDetails> userServer = userDetailsFromJson(response.body);
         // userProvider.addUser(User(
-        //   userID: userServer[0].id.toString(),
-        //   userName: userServer[0].name,
-        //   userEmail: userServer[0].email,
+        //   userID: userLoginDetails.id.toString(),
+        //   userName: userLoginDetails.name,
+        //   userEmail: userLoginDetails.email,
         // ));
         // await userProvider.saveUserToDB();
+        
         result = true;
         return result;
         // loadUser()

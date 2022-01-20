@@ -24,12 +24,14 @@ List<Media> MediaFromJson(String str) =>
 class ProductResponseMain{
   int current_page;
   List<Product> products;
-  ProductResponseMain({this.current_page,this.products});
+  int lastPage;
+  ProductResponseMain({this.current_page,this.products,this.lastPage});
 
   factory ProductResponseMain.fromJson(Map<String,dynamic> json)=>
       ProductResponseMain(
           current_page: json['current_page'],
-          products:  List<Product>.from(json["data"].map((x) => Product.fromJson(x))));
+          products:  List<Product>.from(json["data"].map((x) => Product.fromJson(x))),
+      lastPage: json['last_page']);
 }
 class Product {
   Product({
@@ -46,6 +48,7 @@ class Product {
     this.enabled,
     this.createdAt,
     this.updatedAt,
+    this.isImageLoaded
     // this.image,
     // this.media,
   });
@@ -64,6 +67,7 @@ class Product {
   DateTime createdAt;
   DateTime updatedAt;
   String image;
+  bool isImageLoaded;
   List<Media> media;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -79,7 +83,8 @@ class Product {
         availableSizes: json["available_sizes"],
         enabled: json["enabled"],
         createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"])
+        updatedAt: DateTime.parse(json["updated_at"]),
+        isImageLoaded: false
         // image: json["image"],
         // media: List<Media>.from(json["media"].map((x) => Media.fromJson(x))),
       );

@@ -158,6 +158,14 @@ class _$ProductDao extends ProductDao {
         mapper: _productDBMapper);
   }
 
+
+  @override
+  Future<String> deleteAllProducts() async {
+    _queryAdapter.queryNoReturn('DELETE FROM ProductDB');
+    print("all products deleted");
+    return "success";
+  }
+
   @override
   Future<void> insertProduct(ProductDB productDB) async {
     await _productDBInsertionAdapter.insert(

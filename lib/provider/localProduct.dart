@@ -10,6 +10,7 @@ class LocalProduct with ChangeNotifier {
       imageName,
       availableSizes;
   bool isFavourite;
+  bool isImageLoaded;
 
   LocalProduct(
       {this.id,
@@ -24,10 +25,16 @@ class LocalProduct with ChangeNotifier {
       this.imageName,
       this.availableSizes,
       this.enabled,
-      this.isFavourite});
+      this.isFavourite,
+      this.isImageLoaded});
 
   bool toggleIsFavourite() {
     isFavourite = !isFavourite;
     return isFavourite;
+  }
+  bool toogleIsImageLoaded()
+  {
+    isImageLoaded = !isImageLoaded;
+    return isImageLoaded;
   }
 }

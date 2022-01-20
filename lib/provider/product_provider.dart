@@ -44,6 +44,7 @@ class ProductProvider with ChangeNotifier {
             retailerPrice: _productListDB[i].retailerPrice,
             subCategoryId: _productListDB[i].subCategoryId,
             imageName: _productListDB[i].imageName,
+            isImageLoaded: false,
             isFavourite: _productListDB[i].isFavourite);
         _productList.add(newLocalProduct);
       }

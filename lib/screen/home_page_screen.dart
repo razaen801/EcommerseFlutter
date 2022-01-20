@@ -47,7 +47,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
   Widget _pageChooser(int page) {
     switch (page) {
       case 0:
+      // return _userDetailScreen;
+
+        // Navigator(
+        //   key: const ValueKey<String>('Navigator2'),
+        // )  
+
         return MaterialApp(
+        //   onGenerateRoute: (_) =>
+        //   MaterialPageRoute(builder: (_) => ),
           initialRoute: '/',
           routes: {
             // '/': (context) => new LoginScreen(),
@@ -66,15 +74,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
             //     ProductListCategoryScreen("All Products", 100),
             // ProductDetailScreen.routeId: (context) =>
             //     ProductDetailScreen(),
-            // FavouriteProductScreen.routeId: (context) =>
-            //     FavouriteProductScreen(),
-            // CartListScreen.routeId: (context) => CartListScreen(),
-            // PurchaseHistoryScreen.routeId: (context) =>
-            //     PurchaseHistoryScreen(),
+            FavouriteProductScreen.routeId: (context) =>
+                FavouriteProductScreen(),
+            CartListScreen.routeId: (context) => CartListScreen(), 
+            PurchaseHistoryScreen.routeId: (context) =>
+                PurchaseHistoryScreen(),
             // OrderNowScreen.routeId: (context) => OrderNowScreen(),
           },
         );
-      // return _userDetailScreen;
         break;
       case 1:
         return _aboutUsScreen;

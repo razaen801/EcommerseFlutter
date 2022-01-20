@@ -30,22 +30,58 @@ class _SignUpState extends State<SignUp> {
         email.isEmpty ||
         password.isEmpty ||
         rePassword.isEmpty) {
+      showToastMessage("Please fill up the space!");
       print("Please fill up the space!");
     } else {
       if (password != rePassword) {
         print("Password and re-password doesnot matched!");
+        showToastMessage("Password and re-password doesnot matched!");
       } else {
-        submitSignUpRequest(userName, email, password);
+        // submitSignUpRequest(userName, email, password);
+        Services.userSignUpNew(userName, email, password).then((value) => {
+          _showMyDialog(value.replaceAll("[", "").replaceAll("]", ""))
+        });
         print("Submitted");
       }
     }
   }
 
+  Future<void> _showMyDialog(String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Sign up'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(message),
+                // Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('ok'),
+              onPressed: () {
+                Navigator.pop(context);
+                // Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Container(
+            height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.all(24.0),
             child: Column(
               children: [
@@ -212,8 +248,9 @@ class _SignUpState extends State<SignUp> {
   }
 
   void submitSignUpRequest(String name, String email, String password) async{
-    List<String> response= await Services.userSignUpNew(name, email, password);
-    showToastMessage(response.toString());
+    // List<String> response= await Services.userSignUpNew(name, email, password);
+    // // List<String> response= await Services.userSignUpNew(name, email, password);
+    // showToastMessage(response.toString());
   }
 
   showToastMessage(String s) {
@@ -224,6 +261,6 @@ class _SignUpState extends State<SignUp> {
         textColor: Colors.blue,
         backgroundColor: Colors.white);
   }
-  }
+}
 
 
